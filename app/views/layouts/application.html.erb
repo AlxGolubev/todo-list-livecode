@@ -15,7 +15,11 @@
     <p class="alert"><%= alert %></p>
 
     <% if user_signed_in? %>
-      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+      <nav>
+        <%= link_to 'Lists', root_path %> |
+        <%= link_to 'New List', new_list_path %> |
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+      </nav>
     <% end %>
 
     <%= yield %>

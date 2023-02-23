@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+ .finished {
+   text-decoration: line-through;
+ }
+
+ .active {
+   text-decoration: none;
+ }

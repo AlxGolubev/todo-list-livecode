@@ -1,0 +1,25 @@
+<div>
+  <h1><%= @list.title %></h1>
+  <%= link_to 'Edit', edit_list_path(@list) %>
+  <%= link_to 'Delete', list_path(@list), method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th colspan="3">Acitons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr class="<%= task.completed? ? 'finished' : 'active' %>">
+        <td><%= task.title %></td>
+        <td>
+          <%= link_to task.completed? ? "Restart?" : "Finish!", list_task_path(@list, task), method: :put %>
+          <%= link_to 'Delete', list_task_path(@list, task), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -15,7 +15,11 @@
         <td><%= list.title %></td>
         <td><%= list.user.email %>
         <td><%= list.tasks.count %></td>
-        <td>Links will be there</td>
+        <td>
+          <%= link_to 'Show', list_path(list) %>
+          <%= link_to 'Edit', edit_list_path(list) %>
+          <%= link_to 'Delete', list_path(list), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
