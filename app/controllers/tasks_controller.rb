@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.includes(:list).where(completed: false)
+    @tasks = Task.includes(list: :user).where(completed: false)
   end
 
   def show

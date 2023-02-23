@@ -1,0 +1,22 @@
+<h1>List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Owner</th>
+      <th># tasks</th>
+      <th colspan="3">Acitons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lists.each do |list| %>
+      <tr>
+        <td><%= list.title %></td>
+        <td><%= list.user.email %>
+        <td><%= list.tasks.count %></td>
+        <td>Links will be there</td>
+      </tr>
+    <% end %>
+  </tbody>
+
