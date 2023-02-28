@@ -1,10 +1,16 @@
 class ListsController < ApplicationController
   def index
     @lists = current_user.lists
+    @shared_lists = current_user.shared_lists
   end
 
   def show
-    @list = current_user.lists.find(params[:id])
+    @list = current_user.lists.find_by(id: params[:id]) || current_user.shared_lists.find_by(id: params[:id])
+
+    if @list.nil?
+      raise ActiveRecord::RecordNotFound, "Couldn't find List with 'id'=#{params[:id]}"
+    end
+
     @tasks = @list.tasks.order(completed: :desc)
   end
 
@@ -43,6 +49,6 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:title)
+    params.require(:list).permit(:title, allowed_user_ids: [])
   end
 end

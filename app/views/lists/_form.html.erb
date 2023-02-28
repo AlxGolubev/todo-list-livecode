@@ -15,6 +15,13 @@
   <%= form.label :title %>
   <%= form.text_field :title %>
 
+  <div class="fieldset">
+    <%= form.label :allowed_user_ids, 'Available for:' %>
+    <%= form.collection_check_boxes :allowed_user_ids, User.where.not(id: current_user.id), :id, :email, { class: 'input' } do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

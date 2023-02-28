@@ -38,6 +38,10 @@ class TasksController < ApplicationController
   end
 
   def set_list
-    @list = current_user.lists.find(params[:list_id])
+    @list = current_user.lists.find_by(id: params[:list_id]) || current_user.shared_lists.find_by(id: params[:list_id])
+
+    if @list.nil?
+      raise ActiveRecord::RecordNotFound, "Couldn't find List with 'id'=#{params[:list_id]}"
+    end
   end
 end
