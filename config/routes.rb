@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'lists#index'
 
   resources :lists do
-    resources :tasks
+    resources :tasks, only: [:new, :create, :update, :destroy]
+
   end
 end

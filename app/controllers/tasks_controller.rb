@@ -1,20 +1,18 @@
 class TasksController < ApplicationController
   before_action :set_list
 
-  def index
-    @tasks = Task.includes(list: :user).where(completed: false)
-  end
-
-  def show
-  end
-
   def new
+    @task = @list.tasks.build
   end
 
   def create
-  end
+    @task = @list.tasks.build(task_params)
 
-  def edit
+    if @task.save
+      redirect_to list_path(@list)
+    else
+      render :new
+    end
   end
 
   def update
@@ -34,6 +32,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def task_params
+    params.require(:task).permit(:title)
+  end
 
   def set_list
     @list = current_user.lists.find(params[:list_id])
